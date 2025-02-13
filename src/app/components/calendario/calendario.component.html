@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Calendario</title>
+
+
+</head>
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Preloader -->
+  <!-- Main Sidebar Container -->
+  <!-- Navbar -->
+  <!-- Main Sidebar Container -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Calendario</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a >Home</a></li>
+              <li class="breadcrumb-item active">Calendario</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="sticky-top mb-3">
+
+              <!-- /.card -->
+              <div class="card" style="user-select: none;">
+                <div class="card-header">
+                  <h3 class="card-title">Crear Evento</h3>
+                </div>
+                <div class="card-body">
+                  <div class="btn-group form-group" style="width: 100%; margin-bottom: 10px;">
+                    <ul class="fc-color-picker" id="color-chooser">
+                      <li><a class="text-primary" (click)="setColorEvent('#007bff');" ><fa-icon [icon]="faSquare"></fa-icon></a></li>
+                      <li><a class="text-warning" (click)="setColorEvent('#ffc107');"><fa-icon [icon]="faSquare"></fa-icon></a></li>
+                      <li><a class="text-success" (click)="setColorEvent('#28a745');"><fa-icon [icon]="faSquare"></fa-icon></a></li>
+                      <li><a class="text-danger" (click)="setColorEvent('#dc3545');"><fa-icon [icon]="faSquare"></fa-icon></a></li>
+                      <li><a class="text-muted" (click)="setColorEvent('#6c757d');"><fa-icon [icon]="faSquare"></fa-icon></a></li>
+                    </ul>
+                    
+
+                  </div>
+                  <!-- /btn-group -->
+                  <div class="form-group">
+                    <label>Titulo:</label>
+                    <input id="new-event" type="text" class="form-control" placeholder="Titulo del evento" [(ngModel)]="tituloEvento">
+                  </div>
+                  <div class="form-group">
+                    <label>Detalle:</label>
+                    <textarea [(ngModel)] = "descriptionEvento" id="inputDescription" class="form-control" rows="2"></textarea>
+<!--                     <input id="new-event" type="text" class="form-control" placeholder="Descripción del evento" [(ngModel)]="descriptionEvento"> -->
+                  </div>
+                  <div class="form-group">
+                    <label>Inicio evento</label>
+                    <input id="new-event" type="date" class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="diaInicio" >
+                    <input id="new-event" type="time" class="form-control" placeholder="hh:mm" [(ngModel)]="horaInicio">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Final evento</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)]="checkEnd">
+                      <label class="form-check-label"></label>
+                    </div>
+                    <input id="new-event" type="date" class="form-control" placeholder="yyyy-mm-dd" [disabled]="!checkEnd" [(ngModel)]="diaFin">
+                    <input id="new-event" type="time" class="form-control" placeholder="hh-mm" [disabled]="!checkEnd" [(ngModel)]="horaFin">
+                  </div>
+                  <div class="form-group" *ngIf="globalCheck">
+
+                    <input type="checkbox" [(ngModel)]="isGlobal">
+                    <label class="">Evento global</label>
+                </div>
+
+                  <div class="form-group">
+
+                    <div class="input-group-append">
+                     <button id="add-new-event" type="button" class="btn" [ngStyle]="{'background-color': colorEvent }" (click)="addEvent();">Añadir</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card card-primary">
+              <div class="card-body p-0" style="max-height: 750px; overflow-y: auto;user-select: none;">
+                <!-- THE CALENDAR -->
+                <full-calendar  
+                [options]="calendarOptions" 
+                [events]="eventsPromise | async" 
+                [deepChangeDetection]="true"
+                ></full-calendar>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+</body>
+</html>
+

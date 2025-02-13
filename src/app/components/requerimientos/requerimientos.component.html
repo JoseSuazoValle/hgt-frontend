@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Home</title>
+
+  <!-- Google Font: Source Sans Pro -->
+
+
+
+
+</head>
+
+
+<header>
+
+</header>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Requerimientos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active">Requerimientos</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="container-fluid"> <!-- Este div lo rellenare con los filtros -->
+        <form action="enhanced-results.html">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                              <label>Asunto:</label>
+                              <input type="text"  class="form-control" style="width: 100%;" name = "filterReq" [(ngModel)] = "filterReq" placeholder="Buscar...">
+                              
+                            </div>
+                            
+                            <!-- /.form-group -->
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Empresa:</label>
+                                <select class="form-control" style="width: 100%;" name = "empresa" [(ngModel)] = "empresa">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listaEmpresas" >{{object}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Emisor:</label>
+                                <select class="form-control" style="width: 100%;" name = "emisor" [(ngModel)] = "emisor">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listaEmisor" >{{object}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Receptor:</label>
+                                <select class="form-control" style="width: 100%;" name = "receptor" [(ngModel)] = "receptor">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listaReceptor" >{{object.usuario}} </option>
+                                </select>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Estado:</label>
+                                <select class="form-control"  style="width: 100%;" name = "state" [(ngModel)] = "state">
+                                    <option selected>Todos</option>
+                                    <option>En proceso</option>
+                                    <option>Sin revisión</option>
+                                    <option>Finalizado</option>
+                                    <option>Judicial</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Tipo:</label>
+                                <select class="form-control" style="width: 100%;" name = "tipo" [(ngModel)] = "tipo">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listaTipo" >{{object}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Plazo:</label>
+                                <select class="form-control" style="width: 100%;" name = "plazo" [(ngModel)] = "plazo">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listaPlazo" >{{object}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="clienteCheckPermiso" class="col-2">
+                            <div class="form-group">
+                                <label>Clientes:</label>
+                                <select class="form-control" style="width: 100%;" name = "cliente" [(ngModel)] = "cliente">
+                                    <option selected>Todos</option>
+                                    <option *ngFor="let object of listClientes" >{{object.nombre}} </option>
+                                </select>
+                            </div>
+                        </div>
+  
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Fecha creación:</label>
+                                  <div class="input-group date">
+                                    <input type="date" [(ngModel)] = "fechaFiltro" name="fechaFiltro" >
+                                  </div>
+                              </div>
+                        </div>
+                        <div class="col-6 text-right">
+                            <div class="form-group float-right">
+                                <label>Vista: </label>
+                                <a *ngIf="viewListValue" class="btn btn-sm" (click)="viewList();" style="background-color: lightgray;">
+                                    <fa-icon [icon]="faTableList"></fa-icon>                                   
+                                </a>
+                                <a *ngIf="!viewListValue" class="btn btn-sm" (click)="viewList();" >
+                                    <fa-icon [icon]="faTableList"></fa-icon>                                   
+                                </a>
+                                <a *ngIf="viewCuadriculeValue" class="btn btn-sm float-right" (click)="viewCuadricule();" style="background-color: lightgray;">
+                                    <fa-icon [icon]="faTableCellsLarge"></fa-icon>                                   
+                                </a>
+                                <a *ngIf="!viewCuadriculeValue" class="btn btn-sm float-right" (click)="viewCuadricule();">
+                                    <fa-icon [icon]="faTableCellsLarge"></fa-icon>                                   
+                                </a>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+
+      <!-- Se visualiza la vista de lista de requerimientos -->
+      <div *ngIf="viewListValue" class="card-body p-0" style="max-height: 460px; overflow-y: auto;">
+        <table class="table table-striped projects scroll"  >
+            <thead>
+                <tr>
+                    <th style="width: 1%">
+                        Usuario
+                    </th>
+                    <th style="width: 30%">
+                        Asunto
+                    </th>
+                    <th style="width: 8%">
+                        Empresa
+                    </th>
+                    <th style="width: 8%">
+                        Emisor
+                    </th>
+                    <th style="width: 12%" >
+                        Receptor
+                    </th>
+                    <th *ngIf="clienteCheckPermiso" style="width: 8%" >
+                        Cliente
+                    </th>
+                    <th style="width: 6%" class="text-center">
+                        Plazo
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        Preferencia
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        Estado
+                    </th>
+                    <th style="width: 20%" class="text-center">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listrequerimientos | filter: filterReq : state : empresa : emisor : receptor : plazo : tipo : cliente : fechaFiltro">
+                    <td>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img class="table-avatar img-circle" width="40" height="40" src="{{item.foto}}">
+                            </li>
+                        </ul>
+                    </td>
+                    <td>                        
+                        <a style="font-size: larger;">
+                            {{item.asunto}}
+                        </a>
+                        <br/>
+                        <small>
+                            Creado: {{item.createdAt}} 
+                        </small>
+                    </td>
+                    <td >
+                        {{item.empresa}}
+                    </td>                   
+                    <td class="project_progress">
+                        {{item.emisor}}
+                    </td>
+                    <td >
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px; text-align: center; ">{{item.receptor}}</div>                     
+                    </td>
+                    <td *ngIf="clienteCheckPermiso">
+                        <div >{{item.cliente}}</div>                     
+                    </td>
+                    <td class="project-state">
+                        <div  *ngIf="item.plazo === 1">{{item.plazo}} dia</div>  
+                        <div *ngIf="item.plazo != 1">{{item.plazo}} dias</div>  
+                       
+                    </td>
+                    <td class="project-state">
+                        {{item.tipo}}
+                    </td>
+                    <td class="project-state">
+                        <span *ngIf="item.estado === 'Sin revisión'" class="badge badge-warning">{{item.estado}}</span>       
+                        <span *ngIf="item.estado === 'En proceso'" class="badge badge-success">{{item.estado}}</span> 
+                        <span *ngIf="item.estado === 'Finalizado'" class="badge badge-danger">{{item.estado}}</span> 
+                        <span *ngIf="item.estado === 'Judicial'"class="badge badge-info">{{item.estado}}</span>  
+                    </td>
+                    <td class="project-actions text-center">
+                        <a class="btn btn-primary btn-sm" routerLink="/req-view/{{ item.id }}" style="margin: 2px;width: 35px; height: 35px;">
+                            <fa-icon [icon]="faEye"></fa-icon>
+                            
+                        </a>
+                        <a *ngIf="item.isEditable" class="btn btn-info btn-sm" routerLink="/req-upd/{{ item.id }} " style="margin: 2px; width: 35px; height: 35px;">
+                            <fa-icon [icon]="faPenToSquare"></fa-icon>
+                            
+                        </a>
+                   <a class="btn btn-danger btn-sm" (click)="deleteRequerimiento(item.id);" *ngIf="DeleteCheckPermiso" style="margin: 2px; width: 35px; height: 35px;">
+                            <fa-icon [icon]="faTrash"></fa-icon>
+                            
+                        </a>
+                    </td>
+                </tr>
+                
+
+            </tbody>
+        </table>
+      </div>
+
+      <!-- Se visualiza la vista de cuadriculas -->
+      <div *ngIf="viewCuadriculeValue" class="card-body p-0" style="max-height: 460px; overflow-y: auto; user-select: none; ">
+        <table >
+            <thead style="position: sticky; top: 0;">
+                <tr>
+                    <th style="width: 25%; text-align: center;position: sticky; top: 0;">
+                        Sin revisión
+                    </th>
+                    <th style="width: 25%; text-align: center;position: sticky; top: 0;">
+                        En proceso
+                    </th>
+                    <th style="width: 25%; text-align: center;position: sticky; top: 0;">
+                        Finalizado
+                    </th>
+                    <th style="width: 25%; text-align: center;position: sticky; top: 0;">
+                        Judicial
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listrequerimientos | filter: filterReq : state : empresa : emisor : receptor : plazo : tipo : cliente : fechaFiltro">
+                    <td style="text-align: center;"> 
+                        <br>      
+                        <a  *ngIf="item.estado === 'Sin revisión'"  (click)="req_view(item.id)" class="dropdown-item" style="border-radius: 5%; width: 200px; height: auto; margin-left: 5px; margin-right: 5px; background-color: lightblue;">
+                            <div class="text-right">
+                                <p > {{item.tipo}} </p>                                                 
+                            </div> 
+                                <div class="text-center">
+                                    <img src="{{item.foto}}" alt="User Avatar" class="img-circle img-bordered-sm" width="40" height="40">
+                                    <p>{{item.emisor}} </p>                                                     
+                                </div> 
+                                <div class="text-center" >                                 
+                                    <p class="text-sm"  style="white-space: pre-wrap;" >
+                                        Asunto: {{item.asunto}}                              
+                                    </p>                                                     
+                                </div> 
+                                <div class="text-center">                           
+                                    <p class="text-sm" style="white-space: pre-wrap;" >Receptor: {{item.receptor}}</p>
+                                    <span *ngIf="item.estado === 'Sin revisión'" class="badge badge-warning">{{item.estado}}</span>       
+                                    <span *ngIf="item.estado === 'En proceso'" class="badge badge-success">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Finalizado'" class="badge badge-danger">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Judicial'"class="badge badge-info">{{item.estado}}</span>  
+                                    <p class="text-sm">Creado: {{item.createdAt}} {{item.createdHour}}</p>
+                                </div>                      
+                        </a>                                        
+                    </td>
+                    <td style="text-align: center;">
+                        <br>         
+                        <a  *ngIf="item.estado === 'En proceso'"  (click)="req_view(item.id)" class="dropdown-item " style="border-radius: 5%; width: 200px; height: auto; margin-left: 5px; margin-right: 5px; background-color: lightblue; ">
+                            
+                            <div class="text-right">
+                                <p > {{item.tipo}} </p>                                                 
+                            </div> 
+                                <div class="text-center">
+                                    <img src="{{item.foto}}" alt="User Avatar" class="img-circle img-bordered-sm" width="40" height="40">
+                                    <p>{{item.emisor}} </p>                                                     
+                                </div> 
+                                <div class="text-center" >                                 
+                                    <p class="text-sm"  style="white-space: pre-wrap;" >
+                                        Asunto: {{item.asunto}}                              
+                                    </p>                                                     
+                                </div> 
+                                <div class="text-center">                           
+                                    <p class="text-sm" style="white-space: pre-wrap;" >Receptor: {{item.receptor}}</p>
+                                    <span *ngIf="item.estado === 'Sin revisión'" class="badge badge-warning">{{item.estado}}</span>       
+                                    <span *ngIf="item.estado === 'En proceso'" class="badge badge-success">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Finalizado'" class="badge badge-danger">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Judicial'"class="badge badge-info">{{item.estado}}</span>  
+                                    <p class="text-sm">Creado: {{item.createdAt}} {{item.createdHour}}</p>
+                                </div>                      
+                        </a>                             
+                    </td>                
+                    <td style="text-align: center;">  
+                        <br>       
+                        <a  *ngIf="item.estado === 'Finalizado'"  (click)="req_view(item.id)" class="dropdown-item " style="border-radius: 5%; width: 200px; height: auto; margin-left: 5px; margin-right: 5px; background-color: lightblue;">
+                            <div class="text-right">
+                                <p > {{item.tipo}} </p>                                                 
+                            </div> 
+                                <div class="text-center">
+                                    <img src="{{item.foto}}" alt="User Avatar" class="img-circle img-bordered-sm" width="40" height="40">
+                                    <p>{{item.emisor}} </p>                                                     
+                                </div> 
+                                <div class="text-center" >                                 
+                                    <p class="text-sm"  style="white-space: pre-wrap;" >
+                                        Asunto: {{item.asunto}}                              
+                                    </p>                                                     
+                                </div> 
+                                <div class="text-center">                           
+                                    <p class="text-sm" style="white-space: pre-wrap;" >Receptor: {{item.receptor}}</p>
+                                    <span *ngIf="item.estado === 'Sin revisión'" class="badge badge-warning">{{item.estado}}</span>       
+                                    <span *ngIf="item.estado === 'En proceso'" class="badge badge-success">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Finalizado'" class="badge badge-danger">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Judicial'"class="badge badge-info">{{item.estado}}</span>  
+                                    <p class="text-sm">Creado: {{item.createdAt}} {{item.createdHour}}</p>
+                                </div>                      
+                        </a>                                         
+                    </td>
+                    <td style="text-align: center;">  
+                        <br>       
+                        <a  *ngIf="item.estado === 'Judicial'"  (click)="req_view(item.id)" class="dropdown-item " style="border-radius: 5%; width: 200px; height: auto; margin-left: 5px; margin-right: 5px; background-color: lightpink;">
+                            <div class="text-right">
+                                <p > {{item.tipo}} </p>                                                 
+                            </div> 
+                                <div class="text-center">
+                                    <img src="{{item.foto}}" alt="User Avatar" class="img-circle img-bordered-sm" width="40" height="40">
+                                    <p>{{item.emisor}} </p>                                                     
+                                </div> 
+                                <div class="text-center" >                                 
+                                    <p class="text-sm"  style="white-space: pre-wrap;" >
+                                        Asunto: {{item.asunto}}                              
+                                    </p>                                                     
+                                </div> 
+                                <div class="text-center">                           
+                                    <p class="text-sm" style="white-space: pre-wrap;" >Receptor: {{item.receptor}}</p>
+                                    <span *ngIf="item.estado === 'Sin revisión'" class="badge badge-warning">{{item.estado}}</span>       
+                                    <span *ngIf="item.estado === 'En proceso'" class="badge badge-success">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Finalizado'" class="badge badge-danger">{{item.estado}}</span> 
+                                    <span *ngIf="item.estado === 'Judicial'"class="badge badge-info">{{item.estado}}</span>  
+                                    <p class="text-sm">Creado: {{item.createdAt}} {{item.createdHour}}</p>
+                                </div>                      
+                        </a>                                         
+                    </td>
+              </tr>
+                
+
+            </tbody>
+        </table>
+      </div>
+      
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <div class="content"> <!-- Este div lo rellenare con los filtros -->       
+    <a class="button btn bg-gradient-primary" (click)="req_add();" ><fa-icon [icon]="faPencilAlt"></fa-icon> Agregar requerimiento</a>
+</div>
+  <!-- /.content -->
+</div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<script>
+      $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+</script>
+</body>
+</html>

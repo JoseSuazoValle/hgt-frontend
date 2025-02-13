@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Permisos</title>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Preloader -->
+   
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Gestionar usuarios</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a>Home</a></li>
+              <li class="breadcrumb-item active">Gestionar usuarios</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Seleccionar permisos</h3>    
+            </div>
+            <div class="card-body row">
+                <div class=" col ">
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)] = "administradorCheck">
+                      <label class="form-check-label">Administrador</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)] = "gestionarCheck">
+                      <label class="form-check-label">Gestionar usuarios</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)] = "dashboardCheck">
+                      <label class="form-check-label">DashBoard</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)] = "gerenciaCheck" (change)="RestrictCheckJerencia();">
+                        <label class="form-check-label">Gerencia</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)] = "taoCheck" (change)="RestrictCheckTao();">
+                        <label class="form-check-label">Tao</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)] = "aycCheck" (change)="RestrictCheckAyC();">
+                        <label class="form-check-label">A&C</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)] = "valormatrizCheck" (change)="RestrictCheckValorMatriz();">
+                        <label class="form-check-label">ValorMatriz</label>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="col-6 mb-3">
+                  <div class="form-group">
+                      <label>Usuario</label>
+                      <select class="select2" style="width: 100%;" [(ngModel)] = "user" (change)="getPermisos(user)">
+                          <option selected>Elige un usuario...</option>
+                          <option *ngFor="let object of listaUsuarios" [value]="object.usuario"  >{{object.nombre}} </option>
+
+                      </select>
+                  </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="">
+              <div class="col-6 mb-3">
+                <input type="submit" value="Guardar cambios" class="btn btn-primary float" (click)="modificarPermisos(user);">
+              </div>
+            </div>
+            
+          </div>
+          <!-- /.card -->
+
+        </div>
+
+
+
+        <div class="col-md-5">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">Registrar usuario</h3>    
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <input type="text" [(ngModel)] = "usuario" class="form-control" placeholder="Usuario" >
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span><fa-icon [icon]="faUser"></fa-icon></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="email" [(ngModel)] = "email" class="form-control" placeholder="Email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span ><fa-icon [icon]="faEnvelope"></fa-icon></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" [(ngModel)] = "nombre" class="form-control" placeholder="Nombre completo">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span ><fa-icon [icon]="faAddressCard"></fa-icon></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <select class="form-control"  style="width: 80%;" name = "state" [(ngModel)] = "empresa">
+                <option selected disabled>Selecciona...</option>
+                <option value="tao">TAO</option>
+                <option value="ayc">A&C</option>
+                <option value="valormatriz">ValorMatriz</option>      
+            </select>
+            <div class="input-group-text">
+              <span ><fa-icon [icon]="faBusinessTime"></fa-icon></span>
+            </div>
+
+            
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" [(ngModel)] = "contrasena" class="form-control" placeholder="Contraseña">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span><fa-icon [icon]="faLock"></fa-icon></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" [(ngModel)] = "re_contrasena" class="form-control" placeholder="Repite Contraseña">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span><fa-icon [icon]="faLock"></fa-icon></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <button type="submit" class="btn btn-primary " (click)="addUser();">Registrar </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+<br>
+
+      <div class="row" *ngIf="isAdmin">
+        <div class="col-md-5">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Borrar usuarios</h3>    
+            </div>
+            <div class="card-body">
+
+              <select class="form-control custom-select mb-3" [(ngModel)] = "userDelete">
+                <option selected disabled>Elige un usuario...</option>
+                <option *ngFor="let object of listaUsuarios" [value]="object.usuario" >{{object.nombre}} </option>
+              </select>        
+              <input type="submit" value="Borrar usuario" class="btn btn-danger mb-3" (click)="deleteUsuario(userDelete);">
+            </div>
+            <div *ngIf="isAdmin">
+              <div class="col-4">      
+                
+              </div>
+            </div>
+          </div>
+
+          <!-- /.card -->
+        </div>
+
+      </div>
+
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+</body>
+</html>

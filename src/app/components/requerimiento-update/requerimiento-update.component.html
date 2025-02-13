@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Editar requerimiento</title>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+
+  
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Editar requerimiento</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Editar requerimiento</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Información del requerimiento</h3>    
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">Asunto</label>
+                <input [(ngModel)] = "asunto" type="text" id="inputName" class="form-control" name="Setasunto">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">Receptor</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)] = "ReqPrivateCheck">
+                  <label class="form-check-label">Privado</label>
+                </div>
+                <select [(ngModel)] = "receptor" id="receptor" class="form-control custom-select" name="receptor" (change)="addReceptores(receptor)">
+                  <option selected disabled>Selecciona...</option>
+                  <option >Todos</option>
+                  <option *ngFor="let object of listUsuarios">{{object}} </option>
+                </select>
+                <div class="badge" *ngFor="let item of listReceptores" style="width: 300; height: 300; background-color: lightcyan; user-select: none;">
+                  <a class="button" (click)="deleteReceptor(item);"> 
+                    {{item}} <fa-icon [icon]="faCircleXmark" style="color: red;"></fa-icon>  
+                  </a>
+              </div> 
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Plazo</label>
+                <input [(ngModel)] = "plazo" type="number" id="inputProjectLeader" class="form-control" name="Setplazo" >
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">Tipo</label>
+                <select [(ngModel)] = "tipo" id="inputStatus" class="form-control custom-select" name="Settipo">
+                  <option selected disabled>Selecciona...</option>
+                  <option>Leve</option>
+                  <option>Medio</option>
+                  <option>Urgente</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Detalle</label>
+                <textarea [(ngModel)] = "detalle" id="inputDescription" class="form-control" rows="4" name="Setdetalle"></textarea>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <div class="card card-secondary" *ngIf="clienteCheckPermiso">
+            <div class="card-header">
+              <h3 class="card-title">Opcional</h3>
+            </div>
+            <div class="card-body" >
+              <div class="form-group" >
+                <label for="inputStatus">Cliente/Destinatario</label>
+                <select class="form-control" style="width: 100%;" name = "cliente" [(ngModel)] = "cliente">
+                  <option selected>Selecciona...</option>
+                  <option *ngFor="let object of listClientes" >{{object.nombre}} </option>
+              </select>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Archivos</h3>
+
+            </div>
+            <div class="card-body p-0">
+              <table class="table form-group" >
+                <thead>
+                  <tr>
+                    <th style="width: 90%" class="text-center">Nombre archivo</th>
+                    <th style="width: 10%" class="text-center">Acciones</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor ="let item of listFiles">
+                    <td >{{item.originalName}}</td>
+                    <td class="text-center" style="align-content: center;">
+                      <div class="btn-group btn-group-sm">
+                        <a class="btn btn-danger" (click)="DeleteFile(item.id, item.newName, item.idRequerimiento)"><fa-icon [icon]="faTrash"></fa-icon>  </a>
+                      </div>
+                    </td>          
+
+                </tbody>
+              </table>
+              <div class="card-body" >
+              <div class="form-group">
+                  <label for="exampleInputFile">Subir archivo...</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="exampleInputFile" (change)="getFile($event)">
+                      <label class="custom-file-label" for="exampleInputFile">{{archivoCargado}} </label>
+<!--                       <input type="button" class="custom-file-input" id="exampleInputFile" (change)="getFile($event)" value="asd"> -->
+                    </div>
+                </div>
+              </div>
+              <div class="badge form-group" *ngFor="let item of listFilesUpload" style="width: 300; height: 300; background-color: lightcyan; user-select: none;">
+                <a class="button" (click)="deleteFilesUpload(item);"> 
+                  {{item.fileName}} <fa-icon [icon]="faCircleXmark" style="color: red;"></fa-icon>  
+                </a>
+              </div> 
+            </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a (click)="requerimientos();" class="btn btn-secondary">Cancelar</a>
+          <input type="submit" value="Guardar cambios" class="btn btn-primary float-right" (click)="updateRequerimiento();">
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

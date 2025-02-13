@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Editar perfil</title>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Preloader -->
+   
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Editar perfil</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a>Home</a></li>
+              <li class="breadcrumb-item active">Editar perfil</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Información de usuario</h3>    
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                    <label for="inputName">Usuario</label>
+                    <input [(ngModel)] = "usuario" type="text" readonly id="inputName" class="form-control" value="Mrojas">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Email</label>
+                <input [(ngModel)] = "email" type="email" id="inputName" class="form-control" value="manuelrojas@tao.cl">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Nombre completo</label>
+                <input [(ngModel)] = "nombre" type="text" id="inputProjectLeader" class="form-control" value="Manuel Rojas">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Empresa</label>
+                <input [(ngModel)] = "empresa" type="text" id="inputProjectLeader" readonly class="form-control" value="Manuel Rojas">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Contraseña</label>
+                <input [(ngModel)] = "contrasena" type="text" id="inputProjectLeader" class="form-control" value="contraseña1234">
+              </div>
+
+              <div class="form-group">
+                <label for="inputProjectLeader">Repite contraseña</label>
+                <input [(ngModel)] = "re_contrasena" type="text" id="inputProjectLeader" class="form-control" value="contraseña1234">
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleInputFile">Subir foto...</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" (change)="getFile($event)">
+                    <label class="custom-file-label" for="exampleInputFile">{{archivoCargado}} </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Guardar cambios" class="btn btn-primary " (click)="actualizarUsuario();">
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          
+          
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+</body>
+</html>

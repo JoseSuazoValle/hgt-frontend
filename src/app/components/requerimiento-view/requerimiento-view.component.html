@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT | Detalle requerimiento</title>
+
+
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Detalle de requerimiento</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Detalle requerimiento</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Detalle</h3>
+
+        </div>
+        <div class="card-body" style="max-height: 620px; overflow-y: auto;">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+
+              <div class="row">
+                <div class="col-12">
+                  <h4>Actividad reciente</h4>
+                  <br>
+                  <div style="max-height: 500px; overflow-y: auto;">
+                    <div class="post" *ngFor ="let item of listcomentarios" style="padding-right: 10px;">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="{{item.foto}}" alt="user image" width="40" height="40">
+                        <span class="username">
+                          <a >{{item.nombre}} </a>
+                        </span>
+                        <span class="description">Enviado el {{item.createdAt}} a las {{item.hora}}</span>
+                      </div>
+                      <a class="btn btn-danger btn-sm float-right" *ngIf="valueUser === item.usuario" (click)="deleteComentario(item.id);">
+                        <fa-icon [icon]="faTrash"></fa-icon>                                       
+                      </a>
+                      <p>
+                        {{item.comentario}}
+                      </p>
+                    </div>
+                  </div>                 
+                    <div class="post">
+                      <form class="form-horizontal">
+                        <div class="input-group input-group-sm mb-0">
+                          <input class="form-control form-control-sm" placeholder="Responder..." [(ngModel)] = "comentario" name="comentario">
+                          <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary" (click)="addComentario();">Enviar <fa-icon [icon]="faCommentDots"></fa-icon></button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+              <h3 class="text-secondary"><i class="fas fa-book"></i>{{asunto}}</h3>
+              <a style="font-size: small;">Fecha creacion: {{createdAt}} </a>
+              <br>
+              <br>
+              <p class="text-muted">{{detalle}}</p>
+             
+              <div class="text-muted row">
+                <div class="col">
+                  <p class="text-sm ">Empresa
+                    <b class="d-block">{{empresa}}</b>
+                  </p>
+                </div>
+                <div class="col">
+                  <p class="text-sm" *ngIf="clienteCheckPermiso">Cliente/Empresa
+                    <b class="d-block">{{cliente}}</b>
+                  </p>
+                </div>
+              </div>
+              <div class="text-muted row">
+                <div class="col">
+                  <p class="text-sm ">Emisor
+                    <b class="d-block">{{emisor}}</b>
+                  </p>
+                </div>
+              <div class="col">
+                <p class="text-sm ">Receptor
+                  <b class="d-block">{{receptor}}</b>
+                </p>
+              </div>
+
+              </div>
+              <div class="text-muted">
+                <p class="text-sm">Estado
+                  <br>
+                  <span *ngIf="estado === 'Sin revisión'" class="badge badge-warning">{{estado}}</span>       
+                  <span *ngIf="estado === 'En proceso'" class="badge badge-success">{{estado}}</span> 
+                  <span *ngIf="estado === 'Finalizado'" class="badge badge-danger">{{estado}}</span> 
+                  <span *ngIf="estado === 'Judicial'" class="badge badge-info">{{estado}}</span> 
+                </p>
+                <div class="text-sm">
+                  <label *ngIf="checkReceptor" for="inputStatus">Cambiar estado</label>
+                  <br>
+                  <select [(ngModel)] = "estado" *ngIf="checkReceptor" id="inputStatus" class="form-control custom-select col-6" (change)="modificarRequerimiento();" > 
+                    <option selected disabled>Selecciona...</option>
+                    <option>Sin revisión</option>
+                    <option>En proceso</option>
+                    <option>Finalizado</option>
+                    <option>Judicial</option>
+                  </select>
+               </div>               
+              </div>              
+              <div class="text-muted">
+                <p class="text-sm">
+                  Modifición: 
+                  <br>
+                  Fecha: {{updatedAt}} | {{updatedHour}}
+                  <br>
+                  Por: {{updatedUser}} 
+                </p>
+              </div>
+
+              <h5 class="mt-5 text-muted">Archivos cargados</h5>
+              <div *ngFor ="let item of listFiles">
+                  <a  class="btn-link text-secondary" href="{{item.newName}}" target="_blank">{{item.originalName}} </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <div class="card-body">
+        <a (click)="requerimientos();" class="btn btn-secondary">Volver</a>
+
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+
+</body>
+</html>

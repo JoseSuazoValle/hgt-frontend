@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HGT</title>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DashBoard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a >Home</a></li>
+              <li class="breadcrumb-item active">DashBoard</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row" >
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Gráfico: Total requerimientos por mes.</h3>
+              </div>
+              <div class="card-body"  style="max-height: 320px; overflow-y: auto; user-select: none; ">
+                <ag-charts-angular
+                style="height: 100%"
+                [options]="chartOptions">
+               </ag-charts-angular>
+              </div>
+            </div>
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Grafico: Total estados de A&C</h3>
+              </div>
+              <div class="card-body" style="max-height: 320px; overflow-y: auto; user-select: none; ">
+                <ag-charts-angular
+                style="height: 100%"
+                [options]="pieaycOptions">
+               </ag-charts-angular>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Grafico: Total estados de TAO</h3>
+              </div>
+              <div class="card-body" style="max-height: 320px; overflow-y: auto; user-select: none; ">
+                <ag-charts-angular
+                style="height: 100%"
+                [options]="pietaoOptions">
+               </ag-charts-angular>
+              </div>
+            </div>
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Grafico: Total estados de ValorMatriz</h3>
+              </div>
+              <div class="card-body" style="max-height: 320px; overflow-y: auto; user-select: none; ">
+                <ag-charts-angular
+                style="height: 100%"
+                [options]="pievalormatrizOptions">
+               </ag-charts-angular>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+</div>
+</body>
+</html>
